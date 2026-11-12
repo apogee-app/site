@@ -1,0 +1,738 @@
+---
+import "@fontsource-variable/jost";
+import "@fontsource-variable/jetbrains-mono";
+
+const shot = "/screenshots/apogee-macos.png";
+const logo = "/apogee.png";
+const github = "https://github.com/apogee-app";
+
+const controls = [
+  ["Live temperature", "Watch the reading move as the device heats and cools."],
+  ["Battery", "Check the charge before you start."],
+  ["Material profile", "See which profile is in use, like oil."],
+  ["Session presets", "Keep the temperature and time you like one tap away."],
+  ["Lighting presets", "Pick an LED preset, or open the editor and change it."],
+  ["Vibration", "Set how strongly the device buzzes."],
+  [
+    "Manual override",
+    "Adjust temperature and time by hand, over the active preset.",
+  ],
+  ["Start session", "One button starts the heat."],
+];
+
+const platforms = [
+  ["macOS", "14 and later"],
+  ["iOS", "17 and later"],
+  ["Android", "8.0 and later"],
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Apogee — Your device. Your orbit.</title>
+    <meta
+      name="description"
+      content="Apogee is an independent, open-source app for controlling Focus V and Puffco devices over Bluetooth."
+    />
+    <link rel="icon" type="image/png" href={logo} />
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Skip to content
+    </a>
+
+    <header class="top">
+      <a class="brand" href="/">
+        <img src={logo} alt="" width="32" height="32" />
+        <span>Apogee</span>
+      </a>
+      <a class="top-link" href={github}>
+        GitHub
+      </a>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <h1>
+          <span>Your device.</span>
+          <span>Your orbit.</span>
+        </h1>
+        <p class="lede">
+          Apogee is an independent, open-source app for controlling Focus V and
+          Puffco devices over Bluetooth.
+        </p>
+        <a class="follow" href={github}>
+          <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.77-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"
+            ></path>
+          </svg>
+          Follow on GitHub
+        </a>
+
+        <div class="scene">
+          <svg class="sky" viewBox="0 0 1700 1100" aria-hidden="true">
+            <defs>
+              <linearGradient id="e-sun" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffa425"></stop>
+                <stop offset="0.62" stop-color="#ff3877"></stop>
+                <stop offset="1" stop-color="#f51292"></stop>
+              </linearGradient>
+              <radialGradient id="e-halo">
+                <stop
+                  offset="0.4"
+                  stop-color="#ff3877"
+                  stop-opacity="0.3"
+                ></stop>
+                <stop offset="1" stop-color="#ff3877" stop-opacity="0"></stop>
+              </radialGradient>
+              <!-- The arc's colours, centred on its cyan tip, so the cyan is a spot that turns blue then violet to the right and below. The arc and the planet under it share this paint. -->
+              <radialGradient
+                id="e-arc"
+                gradientUnits="userSpaceOnUse"
+                cx="40"
+                cy="900"
+                r="1644"
+              >
+                <stop offset="0" stop-color="#00ced1"></stop>
+                <stop offset="0.5" stop-color="#4e61d2"></stop>
+                <stop offset="1" stop-color="#9400d3"></stop>
+              </radialGradient>
+              <mask
+                id="e-above"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="1700"
+                height="1100"
+              >
+                <rect width="1700" height="1100" fill="#fff"></rect>
+                <path
+                  d="M40 900C420 520 900 330 1660 620L1700 1100H0Z"
+                  fill="#000"
+                  stroke="#000"
+                  stroke-width="64"
+                  stroke-linejoin="round"
+                ></path>
+              </mask>
+              <!-- Fades the planet into the page as it runs down behind the next section. -->
+              <linearGradient
+                id="e-fade-ramp"
+                gradientUnits="userSpaceOnUse"
+                x1="0"
+                y1="760"
+                x2="0"
+                y2="1500"
+              >
+                <stop offset="0" stop-color="#fff"></stop>
+                <stop
+                  offset="0.27"
+                  stop-color="#fff"
+                  stop-opacity="0.72"
+                ></stop>
+                <stop
+                  offset="0.55"
+                  stop-color="#fff"
+                  stop-opacity="0.32"
+                ></stop>
+                <stop offset="0.78" stop-color="#fff" stop-opacity="0.1"></stop>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+              </linearGradient>
+              <mask
+                id="e-fade"
+                maskUnits="userSpaceOnUse"
+                x="-700"
+                y="0"
+                width="3500"
+                height="1750"
+              >
+                <rect
+                  x="-700"
+                  y="0"
+                  width="3500"
+                  height="1750"
+                  fill="url(#e-fade-ramp)"
+                ></rect>
+              </mask>
+            </defs>
+            <circle
+              class="halo"
+              cx="560"
+              cy="400"
+              r="470"
+              fill="url(#e-halo)"
+            ></circle>
+            <g mask="url(#e-above)">
+              <circle
+                class="sun"
+                cx="560"
+                cy="400"
+                r="215"
+                fill="url(#e-sun)"
+              ></circle>
+            </g>
+            <!-- The arc is the planet's edge. It runs past both sides of the logo's arc so it never ends on a wide screen. -->
+            <g mask="url(#e-fade)">
+              <path
+                d="M-620 1640C-400 1330-150 1090 40 900C420 520 900 330 1660 620C2040 765 2420 1010 2700 1400V2400H-620Z"
+                fill="url(#e-arc)"
+              ></path>
+              <path
+                d="M-620 1640C-400 1330-150 1090 40 900C420 520 900 330 1660 620C2040 765 2420 1010 2700 1400"
+                fill="none"
+                stroke="url(#e-arc)"
+                stroke-width="28"
+              ></path>
+            </g>
+          </svg>
+          <img
+            class="window"
+            src={shot}
+            width="1064"
+            height="1360"
+            alt="The Apogee window on macOS, connected to a CARTA Sport. It shows a live temperature of 206°F, the oil profile, 61% battery, LED and session presets, vibration level, a temperature and time override, and a Start Session button."
+          />
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="e-controls">
+        <h2 id="e-controls">The whole device, in one window</h2>
+        <dl class="controls">
+          {controls.map(([name, text]) => (
+            <div>
+              <dt>{name}</dt>
+              <dd>{text}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="aside">
+          On Puffco devices, Apogee covers heat profiles, lighting and boost.
+        </p>
+      </section>
+
+      <section class="block" aria-labelledby="e-devices">
+        <h2 id="e-devices">Which devices it talks to</h2>
+        <div class="makers">
+          <div>
+            <h3>Focus V</h3>
+            <ul>
+              <li>CARTA 2</li>
+              <li>CARTA Sport</li>
+              <li>AERIS</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Puffco</h3>
+            <ul>
+              <li>Peak Pro</li>
+              <li>New Proxy</li>
+            </ul>
+            <p>
+              Puffco devices need Lorax firmware. Peak Pro lighting is
+              experimental.
+            </p>
+          </div>
+        </div>
+        <p class="aside">
+          The original CARTA and pre-Lorax Peak devices are not supported.
+        </p>
+      </section>
+
+      <section class="block" aria-labelledby="e-open">
+        <h2 id="e-open">Open source, down to the protocol</h2>
+        <div class="open">
+          <div class="open-text">
+            <p>
+              The device protocols are documented in their own open repository.
+              Each platform app is its own repo under the{" "}
+              <a href={github}>apogee-app</a> organisation, licensed Apache-2.0.
+            </p>
+            <p>There is no account to create.</p>
+            <h3>A command line on the Mac</h3>
+            <p>
+              On macOS, the <code>apogee</code> command controls the running
+              app: devices, sessions, presets, temperature, time, unit and
+              vibration.
+            </p>
+          </div>
+          <pre
+            class="term"
+            role="region"
+            tabindex="0"
+            aria-label="Example apogee command-line session"
+          ><code><span class="cmd"><i>$</i> apogee devices</span>
+ID        NAME          FAMILY/PROFILE  RSSI  STATE
+3f9a1c2e  CARTA Sport   Focus V         -53   —
+b47d0e15  Proxy         Puffco          -77   —
+
+<span class="cmd"><i>$</i> apogee connect 3f9a1c2e</span>
+Connected: CARTA Sport (3f9a1c2e, Focus V)
+
+<span class="cmd"><i>$</i> apogee status</span>
+CARTA Sport (3f9a1c2e, Focus V)
+connected: true  ready: true
+battery: 61%  temperature: 206°F
+session: idle  remaining: 0s
+preset: 3  Preset 3 — 525°F for 120s</code></pre>
+        </div>
+      </section>
+
+      <section class="block status" aria-labelledby="e-status">
+        <h2 id="e-status">Still climbing</h2>
+        <p class="lede">
+          Apogee is in development and there is nothing to download yet. Follow
+          the project to see each app arrive.
+        </p>
+        <ul class="platforms">
+          {platforms.map(([name, version]) => (
+            <li>
+              <strong>{name}</strong>
+              <span>{version}</span>
+            </li>
+          ))}
+        </ul>
+        <a class="follow" href={github}>
+          Follow on GitHub
+        </a>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>
+        Apogee is an independent project and is not affiliated with Focus V or
+        Puffco. Product names and trademarks belong to their owners.
+      </p>
+      <p>
+        Apache-2.0. <a href={github}>github.com/apogee-app</a>
+      </p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  html {
+    --text: #f6eeff;
+    --muted: #c3b6e0;
+    --line: rgb(246 238 255 / 0.14);
+    --cyan: #6fe3e6;
+    background: #2a0447;
+    color: var(--text);
+    font-family: "Jost Variable", "Century Gothic", system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: linear-gradient(
+      180deg,
+      #2a0447 0,
+      #310655 22rem,
+      #310b6f 60%,
+      #340f83 calc(100% - 22rem),
+      #213a96 calc(100% - 4rem),
+      #1652a1 100%
+    );
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  dl,
+  dd,
+  pre {
+    margin: 0;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-color: rgb(246 238 255 / 0.4);
+    text-underline-offset: 0.2em;
+  }
+
+  a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .skip {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 10;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: var(--text);
+    color: #2a0447;
+  }
+
+  .skip:focus {
+    top: 1rem;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+
+  .brand img {
+    border-radius: 8px;
+  }
+
+  .top-link {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .top-link:hover {
+    color: var(--text);
+  }
+
+  /* Hero */
+
+  .hero {
+    display: grid;
+    justify-items: center;
+    overflow-x: clip;
+    padding: clamp(2rem, 4.4vw, 3.25rem) clamp(1.25rem, 4vw, 2.5rem) 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 9.2vw, 7rem);
+    font-weight: 500;
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+  }
+
+  h1 span {
+    display: block;
+  }
+
+  .lede {
+    max-width: 31em;
+    margin-top: 1.75rem;
+    color: var(--muted);
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    line-height: 1.45;
+    text-wrap: balance;
+  }
+
+  .follow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem 0.8rem 1.3rem;
+    border-radius: 999px;
+    background: var(--text);
+    color: #2a0447;
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .follow:hover {
+    background: #fff;
+  }
+
+  .scene {
+    /* 532px is the screenshot at its native size. */
+    --w: clamp(15.5rem, 70vw, 532px);
+    position: relative;
+    width: var(--w);
+    margin-top: clamp(4.5rem, 7vw, 5rem);
+  }
+
+  .sky {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--w) * -0.44);
+    width: calc(var(--w) * 3.4);
+    max-width: none;
+    height: auto;
+    overflow: visible;
+    translate: -50% 0;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sun,
+    .halo {
+      animation: rise 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      transform: translateY(150px);
+    }
+  }
+
+  .window {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 2.2rem 3.2rem rgb(18 2 40 / 0.6));
+  }
+
+  /* Sections */
+
+  .hero + .block {
+    padding-top: clamp(3.5rem, 6vw, 5rem);
+  }
+
+  .block {
+    /* Positioned so the text sits above the planet, which runs down behind it. */
+    position: relative;
+    max-width: 62rem;
+    margin: 0 auto;
+    padding: clamp(6rem, 13vw, 10.5rem) clamp(1.25rem, 4vw, 2.5rem) 0;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4.6vw, 3.4rem);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 500;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(2rem, 6vw, 5rem);
+    margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .controls div {
+    padding: 1.35rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .controls dt {
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .controls dd {
+    margin-top: 0.15rem;
+    color: var(--muted);
+  }
+
+  .aside {
+    margin-top: 2rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .makers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem clamp(2rem, 6vw, 5rem);
+    margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  /* Maker and device names share one size; only the colour tells them apart. */
+  .makers h3,
+  .makers li {
+    font-size: clamp(2rem, 4.6vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.16;
+    letter-spacing: -0.03em;
+  }
+
+  .makers h3 {
+    color: #a895d6;
+  }
+
+  .makers p {
+    max-width: 22em;
+    margin-top: 1.1rem;
+    color: var(--muted);
+  }
+
+  .open {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: start;
+    gap: clamp(2rem, 5vw, 4rem);
+    margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .open-text p {
+    color: var(--muted);
+  }
+
+  .open-text p + p {
+    margin-top: 1.1rem;
+  }
+
+  .open-text h3 {
+    margin-top: 2.5rem;
+    font-size: 1.35rem;
+  }
+
+  .open-text h3 + p {
+    margin-top: 0.4rem;
+  }
+
+  .open-text a {
+    color: var(--text);
+  }
+
+  code {
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 0.86em;
+  }
+
+  .open-text code {
+    color: var(--text);
+  }
+
+  .term {
+    overflow-x: auto;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: rgb(22 3 46 / 0.55);
+    color: var(--muted);
+    font-size: clamp(0.66rem, 1.02vw, 0.74rem);
+    line-height: 1.75;
+  }
+
+  .term code {
+    font-size: inherit;
+  }
+
+  .term .cmd {
+    color: var(--text);
+  }
+
+  .term i {
+    color: var(--cyan);
+    font-style: normal;
+  }
+
+  .status {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .platforms {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 1.5rem clamp(2rem, 7vw, 5.5rem);
+    margin-top: 3rem;
+  }
+
+  .platforms li {
+    display: grid;
+  }
+
+  .platforms strong {
+    font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .platforms span {
+    color: var(--muted);
+  }
+
+  .status .follow {
+    margin-top: 3rem;
+    padding-left: 1.5rem;
+  }
+
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem 3rem;
+    max-width: 76rem;
+    margin: clamp(7rem, 14vw, 11rem) auto 0;
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem) 2.5rem;
+    color: #dcd4f2;
+    font-size: 0.9rem;
+  }
+
+  .foot p:first-child {
+    max-width: 38em;
+  }
+
+  @media (max-width: 760px) {
+    .controls,
+    .makers,
+    .open {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .platforms {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .scene {
+      margin-top: 6.5rem;
+    }
+
+    .sky {
+      top: calc(var(--w) * -0.62);
+      translate: -41% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .follow {
+      transition: none;
+    }
+  }
+</style>
